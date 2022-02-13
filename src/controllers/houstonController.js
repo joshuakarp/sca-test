@@ -6,9 +6,10 @@ class HoustonController {
     const parser = new Parser();
     const feed = await parser.parseURL('https://www.nasa.gov/rss/dyn/Houston-We-Have-a-Podcast.rss');
 
-    // Structure the episodes as required
+    // Only get the first count (10) episodes
     const requiredEpisodes = feed.items.splice(0, count);
     const parsedEpisodes = [];
+    // Structure fields as required
     requiredEpisodes.forEach((episode) => {
       parsedEpisodes.push({
         title: episode.title,
@@ -16,13 +17,11 @@ class HoustonController {
         publishedDate: convertISODateToAEST(episode.isoDate),
       })
     });
-    const payload = {
+    return {
       title: feed.title,
       description: feed.description,
       episodes: parsedEpisodes,
-    };
-    // Return only the first 10 podcasts
-    return payload;
+    }
   }
 }
 
