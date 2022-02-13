@@ -9,6 +9,4 @@ function convertISODateToAEST(isoDate) {
     }
 }
 
-module.exports = {
-    convertISODateToAEST
-}
+export { convertISODateToAEST }
